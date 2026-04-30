@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Fiscal</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 20px; background: #f4f4f9; }
+        input { padding: 10px; width: 80%; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; }
+        .card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        button { background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Calculadora de IVA</h2>
+        <input type="number" id="monto" placeholder="Ingresa el monto neto">
+        <button onclick="calcular()">Calcular</button>
+        <h3 id="resultado"></h3>
+    </div>
+
+    <script>
+        function calcular() {
+            const monto = document.getElementById('monto').value;
+            const iva = monto * 0.16;
+            const total = parseFloat(monto) + iva;
+            document.getElementById('resultado').innerHTML = `IVA: $${iva.toFixed(2)} <br> Total: $${total.toFixed(2)}`;
+        }
+
+        // Registro del Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+</body>
+</html>
